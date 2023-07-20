@@ -1,1 +1,15 @@
-FROM python:3.9-buster
+FROM python:3.11.4-slim-bookworm
+
+WORKDIR /app
+
+RUN pip install --upgrade pip setuptools "poetry==1.5.1"
+RUN poetry config virtualenvs.create false
+
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --only main
+
+COPY . .
+
+EXPOSE 8080
+
+CMD uvicorn main:app --host 0.0.0.0
