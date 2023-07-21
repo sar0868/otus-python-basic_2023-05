@@ -9,8 +9,6 @@ COPY . .
 #COPY pyproject.toml poetry.lock ./
 RUN poetry install --only main
 
-
-
 EXPOSE 8000
 
 CMD uvicorn main:app --host 0.0.0.0
