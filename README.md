@@ -14,9 +14,9 @@ _completed_: 15.06.2023
 **2. Homework 2**  
 _deadline_: 17.07.2023  
 _start_: 27.06.2023  
-_completed_: 28.06.2023 
+_completed_: 28.06.2023
 
 **3. Homework 3**  
 _deadline_: 14.08.2023  
 _start_: 19.07.2023  
-_completed_:  
+_completed_: 24.07.2023
