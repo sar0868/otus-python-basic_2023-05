@@ -16,3 +16,5 @@ urllib3==1.26.16
 websocket-client==1.5.3
 aiohttp==3.8.5
 SQLAlchemy>=1.4
+black==23.7.0
+alembic==1.11.3
