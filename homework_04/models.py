@@ -12,12 +12,13 @@ import os
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import declarative_base, declared_attr, relationship
 
-# from mixin import RelatedToUserMixin
+from mixin import RelatedToUserMixin
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+PG_CONN_URI = os.environ.get(
+    "SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
-DB_ECHO = True
-# DB_ECHO = False
+# DB_ECHO = True
+DB_ECHO = False
 
 
 engine = create_engine(url=PG_CONN_URI, echo=DB_ECHO)
@@ -36,48 +37,48 @@ Base = declarative_base(cls=Base)
 Session = None
 
 
-# class User(Base):
-#     name = Column(
-#         String(32),
-#         nullable=False,
-#         unique=False,
-#     )
-#     username = Column(
-#         String(50),
-#         nullable=False,
-#         unique=True,
-#     )
-#     email = Column(
-#         String(100),
-#         nullable=True,
-#         unique=True,
-#     )
+class User(Base):
+    name = Column(
+        String(32),
+        nullable=False,
+        unique=False,
+    )
+    username = Column(
+        String(50),
+        nullable=False,
+        unique=True,
+    )
+    email = Column(
+        String(100),
+        nullable=True,
+        unique=True,
+    )
 
-#     posts = relationship(
-#         "Post",
-#         back_populates="user",
-#         uselist=True,
-#     )
+    posts = relationship(
+        "Post",
+        back_populates="user",
+        uselist=True,
+    )
 
-#     def __str__(self):
-#         return f"User: id={self.id}, name={self.name!r}, username={self.username!r}, email={self.email!r}"
+    def __str__(self):
+        return f"User: id={self.id}, name={self.name!r}, username={self.username!r}, email={self.email!r}"
 
-#     def __repr__(self):
-#         return str(self)
+    def __repr__(self):
+        return str(self)
 
 
-# class Post(RelatedToUserMixin, Base):
-#     title = Column(String(60), nullable=False, unique=False)
-#     body = Column(
-#         Text,
-#         nullable=False,
-#         unique=False,
-#         default="",
-#         server_default="",
-#     )
+class Post(RelatedToUserMixin, Base):
+    title = Column(String(60), nullable=False, unique=False)
+    body = Column(
+        Text,
+        nullable=False,
+        unique=False,
+        default="",
+        server_default="",
+    )
 
-#     def __str__(self):
-#         return f"Post: id={self.id}, title={self.title!r}, body={self.body!r}"
+    def __str__(self):
+        return f"Post: id={self.id}, title={self.title!r}, body={self.body!r}"
 
-#     def __repr__(self):
-#         return str(self)
+    def __repr__(self):
+        return str(self)
