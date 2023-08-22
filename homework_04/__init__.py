@@ -1,11 +1,10 @@
 from . import models, jsonplaceholder_requests, main
-from user import User
-from post import Post
+from models import User, Post, engine
 
 __all__ = [
     "models",
     "jsonplaceholder_requests",
     "main",
     "User",
-    "Post"
+    "Post",
 ]

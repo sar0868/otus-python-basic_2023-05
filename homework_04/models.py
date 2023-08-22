@@ -10,7 +10,8 @@
 
 import os
 from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.orm import declarative_base, declared_attr, relationship
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import declarative_base, declared_attr, relationship, sessionmaker
 
 from mixin import RelatedToUserMixin
 
@@ -21,7 +22,10 @@ PG_CONN_URI = os.environ.get(
 DB_ECHO = False
 
 
-engine = create_engine(url=PG_CONN_URI, echo=DB_ECHO)
+engine = create_async_engine(
+    url=PG_CONN_URI,
+    echo=DB_ECHO,
+)
 
 
 class Base:
@@ -34,7 +38,13 @@ class Base:
 
 
 Base = declarative_base(cls=Base)
-Session = None
+Session = sessionmaker(
+    bind=engine,
+    class_=AsyncSession,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
+)
 
 
 class User(Base):
@@ -68,7 +78,7 @@ class User(Base):
 
 
 class Post(RelatedToUserMixin, Base):
-    title = Column(String(60), nullable=False, unique=False)
+    title = Column(String(120), nullable=False, unique=False)
     body = Column(
         Text,
         nullable=False,
