@@ -9,11 +9,10 @@
 """
 
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Text
+
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, declared_attr, relationship, sessionmaker
-
-from mixin import RelatedToUserMixin
 
 PG_CONN_URI = os.environ.get(
     "SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
@@ -77,7 +76,7 @@ class User(Base):
         return str(self)
 
 
-class Post(RelatedToUserMixin, Base):
+class Post(Base):
     title = Column(String(120), nullable=False, unique=False)
     body = Column(
         Text,
@@ -85,6 +84,16 @@ class Post(RelatedToUserMixin, Base):
         unique=False,
         default="",
         server_default="",
+    )
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+    )
+
+    user = relationship(
+        "User",
+        back_populates="posts",
+        uselist=False,
     )
 
     def __str__(self):

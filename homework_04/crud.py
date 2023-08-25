@@ -6,8 +6,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models import User, Post
 
 
-async def create_user(session: AsyncSession, user_in: User) -> None:
-    session.add(user_in)
+async def create_user(session: AsyncSession, name: str, username: str, email: str = None) -> None:
+    user = User(name=name, username=username, email=email)
+    session.add(user)
     await session.commit()
 
 
@@ -36,18 +37,19 @@ async def get_users(session: AsyncSession) -> list[User]:
     return users
 
 
-async def create_post(session: AsyncSession, post_in: Post) -> None:
-    session.add(post_in)
+async def create_post(session: AsyncSession, title: str, user_id: int, body: str = "") -> None:
+    post = Post(title=title, body=body, user_id=user_id)
+    session.add(post)
     await session.commit()
 
 
 async def create_posts(session: AsyncSession, posts_data: list) -> None:
     posts = [
         Post(
-            id = el['id'],
-            title = el['title'],
-            body = el['body'],
-            user_id = el['userId'],
+            id=el['id'],
+            title=el['title'],
+            body=el['body'],
+            user_id=el['userId'],
         )
         for el in posts_data
     ]

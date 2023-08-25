@@ -28,18 +28,15 @@ from jsonplaceholder_requests import fetch_users_data, fetch_posts_data
 
 
 async def run_queries():
-    async with AsyncSession(engine) as session:
-        # async with session_dependency() as session:
-        # result = await session.execute(select(literal("1")))
-        # print(result.scalar_one())
+    async with Session() as session:
+        ...
 
-        # await crud.delete_user(session, user_id=1)
-        # await crud.delete_user(session, user_id=2)
-        # user_alex = User(username="Alex", id=2)
-        # user = await crud.create_user(session=session, user_in=user_alex)
-        # user_john = User(username="John", email="john@ext.com")
-        # await crud.create_user(session=session, user_in=user_john)
-        # await crud.create_user(session=session, user_in=user_alex)
+        # async with session_dependency() as session:
+        # await crud.create_user(session=session, username="Alex", name="Alex JJJ")
+        # await crud.create_user(session=session, username="John", name="John Smit", email="john_sm@example.com")
+        # await crud.delete_user()
+        # users_data: list[User]
+        # posts_data: list[Post]
         # users_data, posts_data = await asyncio.gather(
         #     fetch_users_data(),
         #     fetch_posts_data(),
@@ -48,8 +45,8 @@ async def run_queries():
         # await crud.clear_table_posts(session=session)
         # await crud.create_users(session=session, users_data=users_data)
         # await crud.create_posts(session=session, posts_data=posts_data)
-        # await crud.create_post(session=session, post_in=Post(title="hello", user_id=1))
-        await crud.get_users(session=session)
+        # # await crud.create_post(session=session, post_in=Post(title="hello", user_id=1))
+        # await crud.get_users(session=session)
 
 
 async def fetch_user():
