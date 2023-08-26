@@ -14,56 +14,47 @@
 """
 import asyncio
 
-from sqlalchemy import Result, literal, select
-from sqlalchemy.ext.asyncio import AsyncSession
-
+import crud
+from jsonplaceholder_requests import fetch_users_data, fetch_posts_data
 from models import (
     User,
     Post,
     engine,
     Session,
+    Base,
 )
-import crud
-from jsonplaceholder_requests import fetch_users_data, fetch_posts_data
 
 
-async def run_queries():
+async def set_dates():
     async with Session() as session:
-        ...
-
-        # async with session_dependency() as session:
-        # await crud.create_user(session=session, username="Alex", name="Alex JJJ")
-        # await crud.create_user(session=session, username="John", name="John Smit", email="john_sm@example.com")
-        # await crud.delete_user()
-        # users_data: list[User]
-        # posts_data: list[Post]
-        # users_data, posts_data = await asyncio.gather(
-        #     fetch_users_data(),
-        #     fetch_posts_data(),
-        # )
-        # await crud.clear_table_users(session=session)
-        # await crud.clear_table_posts(session=session)
-        # await crud.create_users(session=session, users_data=users_data)
-        # await crud.create_posts(session=session, posts_data=posts_data)
-        # # await crud.create_post(session=session, post_in=Post(title="hello", user_id=1))
-        # await crud.get_users(session=session)
+        users_data: list[User]
+        posts_data: list[Post]
+        users_data, posts_data = await asyncio.gather(
+            fetch_users_data(),
+            fetch_posts_data(),
+        )
+        await crud.create_users(session=session, users_data=users_data)
+        await crud.create_posts(session=session, posts_data=posts_data)
 
 
-async def fetch_user():
-    result = await fetch_users_data()
-    print(type(result))
-    print(result)
+async def create_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    await engine.dispose()
 
 
-async def fetch_posts():
-    result = await fetch_posts_data()
-    print(result)
+async def drop_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+
+    await engine.dispose()
 
 
 async def async_main():
-    await run_queries()
-    # await fetch_user()
-    # await fetch_posts()
+    await drop_tables()
+    await create_tables()
+    await set_dates()
 
 
 def main():
@@ -71,4 +62,4 @@ def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(async_main())
+    main()

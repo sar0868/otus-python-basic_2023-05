@@ -20,10 +20,17 @@ PG_CONN_URI = os.environ.get(
 # DB_ECHO = True
 DB_ECHO = False
 
-
 engine = create_async_engine(
     url=PG_CONN_URI,
     echo=DB_ECHO,
+)
+
+Session = sessionmaker(
+    bind=engine,
+    class_=AsyncSession,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
 )
 
 
@@ -37,13 +44,6 @@ class Base:
 
 
 Base = declarative_base(cls=Base)
-Session = sessionmaker(
-    bind=engine,
-    class_=AsyncSession,
-    autoflush=False,
-    autocommit=False,
-    expire_on_commit=False,
-)
 
 
 class User(Base):
