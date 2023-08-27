@@ -24,4 +24,4 @@ _completed_: 24.07.2023
 **4. Homework 4**  
 _deadline_: 07.09.2023  
 _start_: 18.08.2023  
-_completed_:
+_completed_: 27.08.2023
