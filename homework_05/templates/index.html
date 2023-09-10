@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block title %} Homepage {% endblock %} {% block
+body %}
+<h1>Homepage homework 05</h1>
+<h2>Домашнее задание "Веб-приложение на Flask"</h2>
+<ul>
+    <p>Задача:</p>
+    <li>скопируйте папку homework_05 для этой домашки 
+        (Памятка: <a href="https://github.com/OtusTeam/BasePython/tree/homeworks-new">https://github.com/OtusTeam/BasePython/tree/homeworks-new</a>)
+    </li>
+        <li>используйте следующие пакеты:
+        <ul>
+            <li>Flask</li>
+        </ul>
+    </li>
+        
+    
+    <li>в модуле app создайте базовое приложение на Flask</li>
+    <li>создайте index view /</li>
+    <li>добавьте страницу /about/, добавьте туда текст</li>
+
+    <li>создайте базовый шаблон (используйте 
+        <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/#starter-template">
+            https://getbootstrap.com/docs/5.0/getting-started/introduction/#starter-template</a>)</li>
+    <li>в базовый шаблон подключите статику Bootstrap 5 (подключите стили), примените стили Bootstrap</li>
+    <li>в базовый шаблон добавьте навигационную панель nav (<a href="https://getbootstrap.com/docs/5.0/components/navbar/">
+    https://getbootstrap.com/docs/5.0/components/navbar/</a>)</li>
+    <li>в навигационную панель добавьте ссылки на главную страницу / и на страницу /about/ при помощи url_for</li>
+        </ul>
+    <ul>Критерии оценки:
+    <li>создано Flask приложение в app.py</li>
+    <li>добавлены вьюшки / и /about/</li>
+    <li>подключены и применены стили Bootstrap</li>
+    <li>в базовый шаблон добавлена навигационная панель</li>
+    <li>автоматический тест test_homework_05 проходит</li>    
+    </ul>
+        
+
+
+
+<a href="{{url_for("about")}}">About</a>
+
+{% endblock body %}
