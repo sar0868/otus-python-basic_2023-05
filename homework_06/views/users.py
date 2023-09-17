@@ -5,7 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequest
 
-from models import db, Product
+from models import db, User
 
 products_app = Blueprint(
     "users_app",
@@ -16,10 +16,11 @@ products_app = Blueprint(
 
 @products_app.get("/", endpoint="list")
 def get_products_list():
-    stmt = select(User).order_by(User.id)
-    # products = db.session.execute(stmt).scalars()
-    products: Sequence[Product] = db.session.scalars(stmt)
-    return render_template(
-        "products/index.html",
-        products=products,
-    )
+    pass
+    # stmt = select(User).order_by(User.id)
+    # # products = db.session.execute(stmt).scalars()
+    # products: Sequence[User] = db.session.scalars(stmt)
+    # return render_template(
+    #     "products/index.html",
+    #     products=products,
+    # )
