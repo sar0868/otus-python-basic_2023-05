@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from .database import db
+from app import db
 from .posts import Post
 
 
@@ -10,10 +10,7 @@ class User(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     username: Mapped[str]
-    email: Mapped[str | None] = mapped_column(
-        nullable=True,
-        unique=True,
-    )
+    email: Mapped[str | None]
 
     posts: Mapped[list["Post"]] = relationship(
         "Post",
