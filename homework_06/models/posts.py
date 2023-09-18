@@ -2,7 +2,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import db
-# from .users import User
+from .users import User
 
 
 class Post(db.Model):
