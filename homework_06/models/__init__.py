@@ -1,9 +1,9 @@
 __all__ = (
     "db",
-    # "User",
-    # "Post",
+    "User",
+    "Post",
 )
 
 from .database import db
-# from .users import User
-# from .posts import Post
+from .users import User
+from .posts import Post

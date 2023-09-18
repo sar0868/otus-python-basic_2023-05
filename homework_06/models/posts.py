@@ -1,12 +1,12 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app import db
-from .users import User
+from .database import db
+# from .users import User
 
 
 class Post(db.Model):
-    __tablename__ = "postes"
+
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False, unique=False)
     body: Mapped[str | None] = mapped_column(
@@ -16,11 +16,11 @@ class Post(db.Model):
         server_default="",
     )
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("user.id"),
     )
 
     user: Mapped["User"] = relationship(
-        back_populates="users",
+        back_populates="posts",
     )
 
     def __str__(self):

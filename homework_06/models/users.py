@@ -1,11 +1,10 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app import db
-from .posts import Post
+from .database import db
+# from .posts import Post
 
 
 class User(db.Model):
-    __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
@@ -23,3 +22,29 @@ class User(db.Model):
 
     def __repr__(self):
         return str(self)
+
+
+# class Post(db.Model):
+#
+#     id: Mapped[int] = mapped_column(primary_key=True)
+#     title: Mapped[str] = mapped_column(nullable=False, unique=False)
+#     body: Mapped[str | None] = mapped_column(
+#         nullable=False,
+#         unique=False,
+#         default="",
+#         server_default="",
+#     )
+#     user_id: Mapped[int] = mapped_column(
+#         db.ForeignKey("user.id"),
+#     )
+#
+#     user: Mapped["User"] = relationship(
+#         back_populates="posts",
+#     )
+#
+#     def __str__(self):
+#         return f"Post: id={self.id}, title={self.title!r}, body={self.body!r}"
+#
+#     def __repr__(self):
+#         return str(self)
+
