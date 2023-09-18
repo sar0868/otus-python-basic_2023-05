@@ -1,5 +1,7 @@
 import asyncio
 from os import getenv
+
+import requests
 from flask import Flask, render_template, request
 from flask_migrate import Migrate
 from models import db, Post, User
@@ -17,16 +19,29 @@ with app.app_context():
     db.create_all()
 
 
+
+# async def get_dates():
+#
+#     # with db.session as session:
+#
+#     users_data: list[User]
+#     posts_data: list[Post]
+#     users_data, posts_data = asyncio.gather(
+#         fetch_users_data(),
+#         fetch_posts_data(),
+#     )
+#     return [users_data, posts_data]
+
+
 def set_dates():
-    with db.session as session:
-        users_data: list[User]
-        posts_data: list[Post]
-        users_data, posts_data = asyncio.gather(
-            fetch_users_data(),
-            fetch_posts_data(),
-        )
-        crud.create_users(session=session, users_data=users_data)
-        crud.create_posts(session=session, posts_data=posts_data)
+    # users_data, posts_data = asyncio.run(get_dates())
+    response = requests.get("http://jsonplaceholder.typicode.com/users")
+    users_data = response.json()
+    response = requests.get("http://jsonplaceholder.typicode.com/posts")
+    posts_data = response.json()
+    with app.app_context():
+        crud.create_users_1(users_data=users_data)
+        crud.create_posts_1(posts_data=posts_data)
 
 
 @app.get("/", endpoint="index")

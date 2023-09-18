@@ -5,6 +5,32 @@ from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from models import db, User, Post
 
+def create_users_1(users_data: list):
+    users = [
+        User(
+            id=el['id'],
+            name=el['name'],
+            username=el['username'],
+            email=el['email'],
+        )
+        for el in users_data
+    ]
+    db.session.add_all(users)
+    db.session.commit()
+
+def create_posts_1(posts_data: list) -> None:
+    posts = [
+        Post(
+            id=el['id'],
+            title=el['title'],
+            body=el['body'],
+            user_id=el['userId'],
+        )
+        for el in posts_data
+    ]
+    db.session.add_all(posts)
+    db.session.commit()
+
 
 async def create_user(session: AsyncSession, name: str, username: str, email: str = None) -> None:
     user = User(name=name, username=username, email=email)
