@@ -58,7 +58,7 @@ def create_posts(posts_data: list) -> None:
         )
         for el in posts_data
     ]
-    db.session.add_all(posts)s
+    db.session.add_all(posts)
     db.session.commit()
 
 

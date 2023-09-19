@@ -5,6 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequest
 import crud
+from .forms.users import UserForm
 
 from models import db, User
 
@@ -26,3 +27,10 @@ def get_user_by_id(user_id: int) -> User:
         "users/detail.html",
         user=crud.get_user_by_id_or_raise(user_id),
     )
+
+
+@users_app.route("/add/", methods=["GET", "POST"], endpoint="add")
+def create_user():
+    form = UserForm()
+    if request.method == "GET":
+        return render_template("users/add.html", form=form)
