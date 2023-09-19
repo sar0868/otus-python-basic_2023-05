@@ -1,4 +1,4 @@
-from sqlalchemy import delete, select
+from sqlalchemy import Sequence, delete, select
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from models import db, User, Post
@@ -24,15 +24,22 @@ def create_user(name: str, username: str, email: str = None) -> None:
     db.session.commit()
 
 
-# def get_users() -> list[User]:
-#     stmt = (
-#         select(User)
-#         .order_by(User.id)
-#     )
-#     result: Result = db.session.execute(stmt)
-#     users: list[User] = result.scalars().all()
-#     print(users)
-#     return users
+def get_users() -> list[User]:
+    stmt = (
+        select(User)
+        .order_by(User.id)
+    )
+    stmt = select(User).order_by(User.id)
+    users: Sequence[User] = db.session.scalars(stmt)
+    return users
+
+
+def get_user_by_id_or_raise(user_id: int) -> User:
+    user: User = db.get_or_404(
+        User,
+        user_id,
+        description=f"User #{user_id} not found!")
+    return user
 
 
 def create_post(title: str, user_id: int, body: str = "") -> None:
@@ -51,8 +58,15 @@ def create_posts(posts_data: list) -> None:
         )
         for el in posts_data
     ]
-    db.session.add_all(posts)
+    db.session.add_all(posts)s
     db.session.commit()
+
+
+def get_posts_by_user_id_or_raise(user_id: int) -> list[Post]:
+    # posts: list[Post] = db.get_or_404(
+
+    # )
+    pass
 
 
 def delete_user(user_id: int) -> None:

@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} {% endblock %}</title>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css')}}"
+    />
   </head>
-  <body>
+  <body class="m-2">
     <nav class="navbar navbar-expand-md bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Shop</a>
+        <a class="navbar-brand" href="/">Blog</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -23,8 +26,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar-content">
           <ul class="navbar-nav me-auto">
-            {% for endpoint, title in [ ('index', 'Home page'), ] %} {% set path
-            = url_for(endpoint) %} {% set is_current_path = path == request.path
+            {% for endpoint, title in [ ('index', 'Home page'),
+            ('users_app.users', "Users list"), ] %} {% set path =
+            url_for(endpoint) %} {% set is_current_path = path == request.path
             %}
 
             <li class="nav-item">
@@ -64,38 +68,11 @@
                 </li>
               </ul>
             </li>
-            {#
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-            #}
           </ul>
-          <form
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            data-bs-title="Search is not ready yet.."
-            {#
-            data-bs-delay='{"show":200,"hide":150}'
-            #}
-            data-bs-delay="200"
-            class="d-flex"
-            role="search"
-          >
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              disabled
-            />
-            <button disabled class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </div>
     </nav>
     {% block body %} {% endblock %} {% block footer %} {% endblock %}
-    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   </body>
 </html>
