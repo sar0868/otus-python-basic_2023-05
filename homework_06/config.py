@@ -22,7 +22,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = False
 
 
 class TestingConfig(Config):
