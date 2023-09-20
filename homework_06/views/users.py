@@ -1,13 +1,13 @@
 from typing import Sequence
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from sqlalchemy import select
-from sqlalchemy.exc import IntegrityError
-from werkzeug.exceptions import BadRequest
+# from sqlalchemy import select
+# from sqlalchemy.exc import IntegrityError
+# from werkzeug.exceptions import BadRequest
 import crud
-from .forms.users import UserForm
+from .forms.user import UserForm
 
-from models import db, User
+from models import User
 
 users_app = Blueprint(
     "users_app",
@@ -34,3 +34,28 @@ def create_user():
     form = UserForm()
     if request.method == "GET":
         return render_template("users/add.html", form=form)
+    if not form.validate_on_submit():
+        return render_template("users/add.html", form=form), 400
+    user = crud.create_user(
+        name=form.data["name"],
+        username=form.data["username"],
+        email=form.data["email"],
+    )
+    url = url_for("users_app.detail",
+                  user_id=user.id)
+    flash(f'Create user {user.name!r}', category="primary")
+    return redirect(url)
+
+
+@users_app.route("/<int:user_id>/confirm-delete/",
+                 methods=["GET", "POST"],
+                 endpoint="confirm-delete",
+                 )
+def confirm_delete_user(user_id: int):
+    user = crud.get_user_by_id_or_raise(user_id)
+    if request.method == "GET":
+        return render_template("users/confirm-delete.html", user=user)
+    user_name = user.name
+    crud.delete_user(user)
+    flash(f'Deleted user {user_name!r}', category="warning")
+    return redirect(url_for("users_app.users"))

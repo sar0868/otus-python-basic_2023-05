@@ -7,7 +7,6 @@ from models import db, User, Post
 def create_users(users_data: list):
     users = [
         User(
-            id=el['id'],
             name=el['name'],
             username=el['username'],
             email=el['email'],
@@ -18,10 +17,11 @@ def create_users(users_data: list):
     db.session.commit()
 
 
-def create_user(name: str, username: str, email: str = None) -> None:
+def create_user(name: str, username: str, email: str = None) -> User:
     user = User(name=name, username=username, email=email)
     db.session.add(user)
     db.session.commit()
+    return user
 
 
 def get_users() -> list[User]:
@@ -42,16 +42,21 @@ def get_user_by_id_or_raise(user_id: int) -> User:
     return user
 
 
-def create_post(title: str, user_id: int, body: str = "") -> None:
+def delete_user(user: User) -> None:
+    db.session.delete(user)
+    db.session.commit()
+
+
+def create_post(title: str, user_id: int, body: str = "") -> Post:
     post = Post(title=title, body=body, user_id=user_id)
     db.session.add(post)
     db.session.commit()
+    return post
 
 
 def create_posts(posts_data: list) -> None:
     posts = [
         Post(
-            id=el['id'],
             title=el['title'],
             body=el['body'],
             user_id=el['userId'],
@@ -62,6 +67,24 @@ def create_posts(posts_data: list) -> None:
     db.session.commit()
 
 
+def get_posts() -> list[Post]:
+    stmt = (
+        select(Post)
+        .order_by(Post.id)
+    )
+    stmt = select(Post).order_by(Post.id)
+    posts: Sequence[Post] = db.session.scalars(stmt)
+    return posts
+
+
+def get_post_by_id_or_raise(post_id: int) -> Post:
+    post: Post = db.get_or_404(
+        Post,
+        post_id,
+        description=f"Post #{post_id} not found!")
+    return post
+
+
 def get_posts_by_user_id_or_raise(user_id: int) -> list[Post]:
     # posts: list[Post] = db.get_or_404(
 
@@ -69,37 +92,6 @@ def get_posts_by_user_id_or_raise(user_id: int) -> list[Post]:
     pass
 
 
-def delete_user(user_id: int) -> None:
-    stmt = (
-        delete(User)
-        .where(User.id == user_id)
-
-    )
-    db.session.execute(stmt)
-    db.session.commit()
-
-
-def clear_table_users() -> None:
-    stmt = (
-        delete(User)
-    )
-    db.session.execute(stmt)
-    db.session.commit()
-
-
-def delete_post(post_id: int) -> None:
-    stmt = (
-        delete(Post)
-        .where(Post.id == post_id)
-
-    )
-    db.session.execute(stmt)
-    db.session.commit()
-
-
-def clear_table_posts() -> None:
-    stmt = (
-        delete(Post)
-    )
-    db.session.execute(stmt)
+def delete_post(post: Post) -> None:
+    db.session.delete(post)
     db.session.commit()

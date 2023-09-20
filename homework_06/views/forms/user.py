@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, EmailField
 from wtforms.validators import DataRequired, Email, Length
 
 
@@ -16,14 +16,14 @@ class UserForm(FlaskForm):
         validators=[
             DataRequired(),
             Length(min=3),
+        ],
+    )
+    email = EmailField(
+        label="email:",
+        validators=[
+            Email(),
         ]
     )
-    # email = StringField(
-    #     label="email:",
-    #     validators=[
-    #         Email(),
-    #     ]
-    # )
     submit = SubmitField(
         label="Submit",
     )

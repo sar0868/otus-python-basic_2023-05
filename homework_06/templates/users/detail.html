@@ -1,5 +1,5 @@
-{% extends 'users/base.html' %} {% block title %} User: {{ user.name}} {%
-endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %} User: {{ user.name}} {% endblock %}
+{% block body %}
 <h2>User: {{user.name}}</h2>
 
 <div>
@@ -9,5 +9,14 @@ endblock %} {% block body %}
     <div>email: {{user.email}}</div>
   </div>
 </div>
-
+<div class="my-3">
+  <a class="btn btn-primary" href="{{ url_for('users_app.users')}}"
+    >Back to users list</a
+  >
+  <a
+    class="btn btn-danger"
+    href="{{ url_for('users_app.confirm-delete', user_id=user.id)}}"
+    >Delete user</a
+  >
+</div>
 {% endblock %}

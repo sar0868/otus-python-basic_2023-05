@@ -4,9 +4,14 @@ body %}
 <div>
   <form method="post">
     <div>
-      {{ form.hidden_tag() }} {{ form.name.label(class="form-label") }} {{
-      form.name(size=20, class="form-control") }} {% if form.errors %} {% for
-      field_name, errors in form.errors.items() %}
+      {{ form.hidden_tag() }} {{ form.name.label(class="form-label") }}
+      {{form.name(size=20, class="form-control", placeholder="enter name") }} {{
+      form.username.label(class="form-label mt-2") }} {{form.username(size=20,
+      class="form-control", placeholder="enter username") }} {{
+      form.email.label(class="form-label mt-2") }}
+      {{form.email(class="form-control", placeholder="enter email") }} {{
+      form.submit(type="submit", class="btn btn-primary my-3")}} {% if
+      form.errors %} {% for field_name, errors in form.errors.items() %}
       <div class="my-3 alert alert-danger">
         <strong>{{ field_name }}</strong>
         <ul>

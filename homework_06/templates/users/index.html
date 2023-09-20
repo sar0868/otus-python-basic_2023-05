@@ -1,14 +1,20 @@
-{% extends 'users/base.html' %} {% block title %} Users {% endblock %} {% block
-body %}
+{% extends 'base.html' %} {% block title %} Users {% endblock %} {% block body
+%}
 <h2>Users list</h2>
 <ul>
   {% for user in users %}
   <li>
-    <a href="{{ url_for('users_app.detail', user_id=user.id)}}"
+    <a
+      href="{{ url_for('users_app.detail', user_id=user.id)}}"
+      class="btn btn-outline-primary m-1"
       >{{ user.name }}</a
     >
   </li>
 
   {% endfor %}
 </ul>
+<div>
+  <a class="btn btn-primary" href="{{ url_for('users_app.add')}}">Add user</a>
+</div>
+
 {% endblock %}
