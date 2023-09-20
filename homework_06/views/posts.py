@@ -15,14 +15,20 @@ posts_app = Blueprint(
 
 @posts_app.get("/", endpoint="posts")
 def get_posts_list():
-    return render_template("posts/index.html", posts=crud.get_posts())
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.order_by(Post.id).paginate(per_page=10)
+
+    return render_template("posts/index.html", pagination=pagination)
+    # return render_template("posts/index.html", posts=crud.get_posts())
 
 
 @posts_app.get("/<int:post_id>/", endpoint="detail")
 def get_post_by_id(post_id: int) -> Post:
+    post = crud.get_post_by_id_or_raise(post_id)
     return render_template(
         "posts/detail.html",
-        post=crud.get_post_by_id_or_raise(post_id),
+        post=post,
+        user_name=crud.get_user_by_id_or_raise(post.id).name
     )
 
 

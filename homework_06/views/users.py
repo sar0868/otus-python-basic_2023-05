@@ -1,9 +1,6 @@
 from typing import Sequence
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-# from sqlalchemy import select
-# from sqlalchemy.exc import IntegrityError
-# from werkzeug.exceptions import BadRequest
 import crud
 from .forms.user import UserForm
 

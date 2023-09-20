@@ -1,19 +1,54 @@
 {% extends 'base.html' %} {% block title %} Posts list {% endblock %} {% block
 body %}
-<h2>Posts list</h2>
-<ul>
-  {% for post in posts %}
-  <li>
-    <a href="{{ url_for('posts_app.detail', post_id=post.id)}}" class="m-1"
-      >{{ post.title }}</a
-    >
-    User: {{ post.user_id}}
-  </li>
+<h2>Posts list {{ pagination.page}}</h2>
+<!-- <ul> -->
+{% for post in pagination.items %}
+<!-- <li> -->
+<p>
+  <a href="{{ url_for('posts_app.detail', post_id=post.id)}}" class="m-1"
+    >{{ post.title }}</a
+  >
+  User: {{ post.user_id}}
+</p>
+<!-- </li> -->
 
-  {% endfor %}
-</ul>
+{% endfor %}
+<!-- </ul> -->
 <div>
   <a class="btn btn-primary" href="{{ url_for('posts_app.add')}}">Add post</a>
 </div>
 
+<div class="pagination my-2">
+  {% if pagination.has_prev %}
+  <span>
+    <a
+      class="page-number"
+      href="{{ url_for('posts_app.posts', page=pagination.prev_num) }}"
+    >
+      {{ '<<<' }}
+    </a>
+  </span>
+  {% endif %} {% for number in pagination.iter_pages() %} {% if pagination.page
+  != number %}
+  <span>
+    <a
+      class="page-number m-2"
+      href="{{ url_for('posts_app.posts', page=number) }}"
+    >
+      {{ number }}
+    </a>
+  </span>
+  {% else %}
+  <span class="current-page-number">{{ number }}</span>
+  {% endif %} {% endfor %} {% if pagination.has_next %}
+  <span>
+    <a
+      class="page-number"
+      href="{{ url_for('posts_app.posts', page=pagination.next_num) }}"
+    >
+      {{ '>>>' }}
+    </a>
+  </span>
+  {% endif %}
+</div>
 {% endblock %}

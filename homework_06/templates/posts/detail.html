@@ -3,15 +3,23 @@
 <h2>Post: {{post.name}}</h2>
 
 <div>
-  <div class="grid">
-    <div>name: {{ post.title }}</div>
+  <div>
+    <div>title: {{ post.title }}</div>
     <div>body: {{post.body}}</div>
-    <div>user_id: {{post.user_id}}</div>
+    <div>
+      user:
+      <a href="{{ url_for('users_app.detail', user_id=post.user.id)}}"
+        >{{user_name}}</a
+      >
+    </div>
   </div>
 </div>
 <div class="my-3">
   <a class="btn btn-primary" href="{{ url_for('posts_app.posts')}}"
     >Back to posts list</a
+  >
+  <a class="btn btn-primary" href="{{ url_for('users_app.users')}}"
+    >Back to users list</a
   >
   <a
     class="btn btn-danger"

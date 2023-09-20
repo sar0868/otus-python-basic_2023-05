@@ -25,12 +25,7 @@ def create_user(name: str, username: str, email: str = None) -> User:
 
 
 def get_users() -> list[User]:
-    stmt = (
-        select(User)
-        .order_by(User.id)
-    )
-    stmt = select(User).order_by(User.id)
-    users: Sequence[User] = db.session.scalars(stmt)
+    users: list[User] = User.query.order_by(User.id).all()
     return users
 
 
@@ -68,12 +63,7 @@ def create_posts(posts_data: list) -> None:
 
 
 def get_posts() -> list[Post]:
-    stmt = (
-        select(Post)
-        .order_by(Post.id)
-    )
-    stmt = select(Post).order_by(Post.id)
-    posts: Sequence[Post] = db.session.scalars(stmt)
+    posts: list[Post] = Post.query.order_by(Post.id).all()
     return posts
 
 

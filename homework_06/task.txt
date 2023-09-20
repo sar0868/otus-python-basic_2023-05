@@ -1,37 +1,11 @@
-Взять данные из hw 04
-создать flask app для этих данных (получить их (или взять уже полученные))
-    - создать страницы для их отображения
-    - дополнения (ввод новых данных)
-    - удаления ?
-
-table: posts
-title, body, user_id
-    - title:
-        sunt aut facere repellat provident occaecati excepturi
-        optio reprehenderit
-    - body:
-        quia et suscipit suscipit recusandae consequuntur expedita et
-        cum reprehenderit molestiae ut ut quas totam nostrum rerum est
-        autem sunt rem eveniet
-    -user_id:
-        1
-
-table: users
-name, username, email, id
-    - name:
-        Leanne Graham
-    - username:
-        Bret
-    -email:
-        Sincere@april.biz
-    -id:
-        1
+Dockerfile
+Docker compose
 
 + users: добавление пользователей
 user detail: 
     + сделать кнопки(ссылки) удаления, 
     + возврата в список, 
-    получения постов пользователя (если есть)
+    + получения постов пользователя (если есть)
 posts: список(title) с ссылками на детализацию, добавление постов, пагинация??
 post detail: 
     вовод записи (получение user_id по выбору из списка пользователей), 
