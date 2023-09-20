@@ -29,7 +29,7 @@ def get_post_by_id(post_id: int) -> Post:
     return render_template(
         "posts/detail.html",
         post=post,
-        user_name=crud.get_user_by_id_or_raise(post.id).name
+        user_name=crud.get_user_by_id_or_raise(post.user_id).name
     )
 
 
