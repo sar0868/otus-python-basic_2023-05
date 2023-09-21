@@ -9,7 +9,7 @@ COPY . .
 
 RUN poetry install
 
-EXPOSE 8000
 
-CMD python main.py
-#uvicorn main:app --host 0.0.0.0
+CMD ["uwsgi", "--http", "0.0.0.0:80", "--wsgi-file", "main.py", \
+    "--callable", "app", "--stats", "0.0.0.0:81"]
+
