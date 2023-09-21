@@ -1,10 +1,8 @@
-from typing import Sequence
-
-from flask import Blueprint, render_template, request, redirect, url_for, flash
 import crud
-from .forms.user import UserForm
-
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import User
+
+from .forms.user import UserForm
 
 users_app = Blueprint(
     "users_app",

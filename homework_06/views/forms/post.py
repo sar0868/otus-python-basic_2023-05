@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, EmailField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
 
 
 class PostForm(FlaskForm):
@@ -16,11 +16,6 @@ class PostForm(FlaskForm):
         validators=[
             DataRequired(),
         ],
-    )
-    user_id = StringField(
-        label="user_id:",
-        validators=[
-            DataRequired(),]
     )
     submit = SubmitField(
         label="Submit",

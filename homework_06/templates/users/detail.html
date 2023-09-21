@@ -23,6 +23,14 @@
   </ul>
 </div>
 
+<div class="my-2">
+  <a
+    class="btn btn-primary"
+    href="{{ url_for('posts_app.add', user_id=user.id)}}"
+    >Add post</a
+  >
+</div>
+
 <div class="my-3">
   <a class="btn btn-primary" href="{{ url_for('users_app.users')}}"
     >Back to users list</a

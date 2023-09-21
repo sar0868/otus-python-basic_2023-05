@@ -1,10 +1,8 @@
-from typing import Sequence
-
-from flask import Blueprint, render_template, request, redirect, url_for, flash
 import crud
-from .forms.post import PostForm
-
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import Post
+
+from .forms.post import PostForm
 
 posts_app = Blueprint(
     "posts_app",
@@ -15,12 +13,7 @@ posts_app = Blueprint(
 
 @posts_app.get("/", endpoint="posts")
 def get_posts_list():
-    # page = request.args.get('page', 1, type=int)
-    # pagination = Post.query.order_by(Post.id).paginate(per_page=10)
-
-    # return render_template("posts/index.html", pagination=pagination)
     return render_template("posts/index.html", posts=crud.get_posts())
-    # return render_template("posts/index.html", posts=crud.get_posts())
 
 
 @posts_app.get("/<int:post_id>/", endpoint="detail")
@@ -33,8 +26,8 @@ def get_post_by_id(post_id: int) -> Post:
     )
 
 
-@posts_app.route("/add/", methods=["GET", "POST"], endpoint="add")
-def create_post():
+@posts_app.route("/add/<int:user_id>/", methods=["GET", "POST"], endpoint="add")
+def create_post(user_id: int):
     form = PostForm()
     if request.method == "GET":
         return render_template("posts/add.html", form=form)
@@ -43,7 +36,7 @@ def create_post():
     post = crud.create_post(
         title=form.data["title"],
         body=form.data["body"],
-        user_id=form.data["user_id"],
+        user_id=user_id,
     )
     url = url_for("posts_app.detail",
                   post_id=post.id)

@@ -8,8 +8,6 @@ body %}
       {{form.title(size=20, class="form-control", placeholder="enter title") }}
       {{ form.body.label(class="form-label mt-2") }} {{form.body(size=20,
       class="form-control", placeholder="enter text") }} {{
-      form.user_id.label(class="form-label mt-2") }}
-      {{form.user_id(class="form-control", placeholder="enter user id") }} {{
       form.submit(type="submit", class="btn btn-primary my-3")}} {% if
       form.errors %} {% for field_name, errors in form.errors.items() %}
       <div class="my-3 alert alert-danger">

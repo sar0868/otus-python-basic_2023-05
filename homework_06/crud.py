@@ -1,7 +1,3 @@
-from flask import request
-from sqlalchemy import Sequence, delete, select
-from sqlalchemy.engine import Result
-from sqlalchemy.ext.asyncio import AsyncSession
 from models import db, User, Post
 
 
@@ -26,8 +22,7 @@ def create_user(name: str, username: str, email: str = None) -> User:
 
 
 def get_users() -> list[User]:
-    page = request.args.get('page', 1, type=int)
-    users = User.query.order_by(User.id).paginate(per_page=5)
+    users = User.query.order_by(User.id).paginate(per_page=10)
     return users
 
 
@@ -65,7 +60,6 @@ def create_posts(posts_data: list) -> None:
 
 
 def get_posts() -> list[Post]:
-    page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.id).paginate(per_page=10)
     return posts
 
@@ -76,13 +70,6 @@ def get_post_by_id_or_raise(post_id: int) -> Post:
         post_id,
         description=f"Post #{post_id} not found!")
     return post
-
-
-def get_posts_by_user_id_or_raise(user_id: int) -> list[Post]:
-    # posts: list[Post] = db.get_or_404(
-
-    # )
-    pass
 
 
 def delete_post(post: Post) -> None:
