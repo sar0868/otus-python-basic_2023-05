@@ -5,5 +5,4 @@ __all__ = (
 )
 
 from .database import db
-from .users import User
-from .posts import Post
+from .users_posts import User, Post

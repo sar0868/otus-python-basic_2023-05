@@ -1,8 +1,26 @@
-from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import db
-from .users import User
+
+
+class User(db.Model):
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    username: Mapped[str]
+    email: Mapped[str | None]
+
+    posts: Mapped[list["Post"]] = relationship(
+        "Post",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+
+    def __str__(self):
+        return f"User: id={self.id}, name={self.name!r}, username={self.username!r}, email={self.email!r}"
+
+    def __repr__(self):
+        return str(self)
 
 
 class Post(db.Model):
@@ -16,7 +34,7 @@ class Post(db.Model):
         server_default="",
     )
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("user.id"),
+        db.ForeignKey("user.id"),
     )
 
     user: Mapped["User"] = relationship(
