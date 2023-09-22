@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block title %} Create post {% endblock %} {% block
+body %}
+<h2>Create new post</h2>
+<div>
+  <form method="post">
+    <div>
+      {{ form.hidden_tag() }} {{ form.title.label(class="form-label") }}
+      {{form.title(size=20, class="form-control", placeholder="enter title") }}
+      {{ form.body.label(class="form-label mt-2") }} {{form.body(size=20,
+      class="form-control", placeholder="enter text") }} {{
+      form.submit(type="submit", class="btn btn-primary my-3")}} {% if
+      form.errors %} {% for field_name, errors in form.errors.items() %}
+      <div class="my-3 alert alert-danger">
+        <strong>{{ field_name }}</strong>
+        <ul>
+          {% for error in errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </form>
+</div>
+{% endblock %}

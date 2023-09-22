@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %} User: {{ user.name}} {% endblock %}
+{% block body %}
+<h2>User: {{user.name}}</h2>
+
+<div>
+  <div>
+    <div>name: {{ user.name }}</div>
+    <div>username: {{user.username}}</div>
+    <div>email: {{user.email}}</div>
+  </div>
+</div>
+<div class="grid">
+  <h3>Posts user {{user.name}}</h3>
+  <ul class="list-group">
+    {% for post in user.posts %}
+    <li class="list-group-item m-0">
+      <a href="{{ url_for('posts_app.detail', post_id=post.id)}}"
+        >{{ post.title }}</a
+      >
+    </li>
+
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="my-2">
+  <a
+    class="btn btn-primary"
+    href="{{ url_for('posts_app.add', user_id=user.id)}}"
+    >Add post</a
+  >
+</div>
+
+<div class="my-3">
+  <a class="btn btn-primary" href="{{ url_for('users_app.users')}}"
+    >Back to users list</a
+  >
+  <a
+    class="btn btn-danger"
+    href="{{ url_for('users_app.confirm-delete', user_id=user.id)}}"
+    >Delete user</a
+  >
+</div>
+{% endblock %}
