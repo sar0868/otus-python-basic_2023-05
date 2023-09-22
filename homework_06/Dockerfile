@@ -7,9 +7,4 @@ RUN poetry config virtualenvs.create false --local
 
 COPY . .
 
-RUN poetry install
-
-
-CMD ["uwsgi", "--http", "0.0.0.0:80", "--wsgi-file", "main.py", \
-    "--callable", "app", "--stats", "0.0.0.0:81"]
-
+RUN poetry install --no-ansi --only main
