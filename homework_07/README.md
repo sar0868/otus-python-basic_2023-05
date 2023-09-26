@@ -11,3 +11,22 @@
 - создано и установлено приложение
 - созданы модели
 - созданы миграции
+
+
+### Проект блог  
++ models:
+  1. User,  
+  2. Post
++ pages:
+  1. home,
+  2. posts,
+     - lists,
+     - delete list
+     -  edit post?
+  3. users:
+     - lists,
+     - user -> lists (detail)
+     - create user
+     - delete user
+     -  edit user?
+
