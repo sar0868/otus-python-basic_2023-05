@@ -21,6 +21,20 @@ def users_list(request: HttpRequest) -> HttpResponse:
     )
     return render(
         request=request,
-        template_name="users/index.html",
+        template_name="users/users.html",
         context={"users": users},
+    )
+
+
+def posts_list(request: HttpRequest) -> HttpResponse:
+    posts = (
+        Post
+        .objects
+        .order_by("pk")
+        .all()
+    )
+    return render(
+        request=request,
+        template_name="posts/posts.html",
+        context={"posts": posts},
     )

@@ -29,20 +29,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar-content">
           <ul class="navbar-nav me-auto">
-            {% comment %} {% for endpoint, title in [ ('index', 'Home page'),
-            ('users_app.users', "Users list"), ('posts_app.posts', "Posts
-            list"), ] %} 
-             {% set path = url_for(endpoint) %} {% set
-            is_current_path = path == request.path %} 
+          
+          {% comment %} {% with listPage = [('index.html', 'Home page'), ('users.index.html', "Users list")] %}
+            {% for endpoint, title in listPage %} 
+
+             {% if endpoint == request.path %}
             <li class="nav-item">
               <a
-                class="nav-link {{ 'active' if is_current_path }}" 
+                class="nav-link active" 
                 aria-current="page"
                 href="{{ path }}"
                 >{{ title }}</a
               >
             </li>
-            {% endfor %} {% endcomment %}
+              {% endif %}
+            {% endfor %} 
+          {% endwith %} {% endcomment %}
+            <li> 
+            <a href="/"> Home page</a>
+            </li>
+            <li> 
+            <a href="users/"> Users list</a>
+            </li>
+            <li> 
+              <a href="posts/"> Posts list</a>
+            </li>
           </ul>
         </div>
       </div>
