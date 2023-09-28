@@ -15,6 +15,9 @@ class User(models.Model):
     def __repr__(self):
         return str(self)
 
+    # class Meta:
+    #     ordering = ['username']
+
 
 class Post(models.Model):
     title = models.CharField(max_length=64)
