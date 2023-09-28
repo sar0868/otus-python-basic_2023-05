@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    {% comment %}
+<!--    <link-->
+<!--      rel="stylesheet"-->
+<!--      href="{{ url_for('static', filename='css/bootstrap.min.css')}}"-->
+<!--    />-->{% endcomment %}
+  </head>
+
+  <body class="m-2">
+  {% comment %}
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Blog</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar-content"
+          aria-controls="navbar-content"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav me-auto">
+            {% for endpoint, title in [ ('index', 'Home page'),
+            ('users_app.users', "Users list"), ('posts_app.posts', "Posts
+            list"), ] %} {% set path = url_for(endpoint) %} {% set
+            is_current_path = path == request.path %}
+
+            <li class="nav-item">
+              <a
+                class="nav-link {{ 'active' if is_current_path }}"
+                aria-current="page"
+                href="{{ path }}"
+                >{{ title }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=True) %} {% if
+      messages %}
+      <div>
+        {% for category, message in messages %}
+        <div
+          class="alert alert-{{ 'primary' if category == 'message' else category }}"
+        >
+          {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+    </div>
+    {% endcomment %}
+    {% block body %} {% endblock %}
+{% comment %}
+    <footer>
+      {% block footer %} &copy otus-python-basic_2023-05, safarov-ar@yandex.ru{%
+      endblock %}
+    </footer>
+
+<!--    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>-->
+ {% endcomment %}
+  </body>
+</html>
