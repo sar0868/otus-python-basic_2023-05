@@ -33,6 +33,3 @@
      - create user
      - delete user
      - edit user?
-
-user: admin
-password: 123passwd
