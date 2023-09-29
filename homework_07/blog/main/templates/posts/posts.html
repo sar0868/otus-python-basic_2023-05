@@ -1,0 +1,18 @@
+{% extends 'root.html' %} 
+{% block title %} Posts {% endblock %}
+
+ {% block body%}
+<h2>Posts list</h2>
+
+<ul>
+  {% for post in posts %}
+  <li>
+    title: <a href="{% url 'post' post.pk %}">{{ post.title }}</a>; 
+
+    author: 
+    <a href="{% url 'user' post.user_id.pk %}">{{ post.user_id.username }}</a>
+
+  </li>
+  {% endfor %}
+</ul>
+{% endblock%}

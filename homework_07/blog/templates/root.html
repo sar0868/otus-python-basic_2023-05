@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}" />
+  </head>
+
+  <body class="m-2">
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Blog</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar-content"
+          aria-controls="navbar-content"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav me-auto">       
+            <li class="nav-item">
+              <a href="/" class="nav-link"> Home page</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'users' %}" class="nav-link"> Users list</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'posts' %}" class="nav-link"> Posts list</a>
+            </li> 
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div>
+        {% for category, message in messages %}
+        <div
+          {% comment %}
+          class="alert alert-{{ 'primary' if category == 'message' else category }}"
+          {% endcomment %}
+        >
+          {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+    {% block body %} {% endblock %}
+    <footer>
+      {% block footer %}{%  endblock %}
+       <p> &copy otus-python-basic_2023-05, safarov-ar@yandex.ru </p>
+    </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+  </body>
+</html>
