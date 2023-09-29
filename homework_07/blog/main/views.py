@@ -45,6 +45,7 @@ def posts_list(request: HttpRequest) -> HttpResponse:
         Post
         .objects
         .order_by("pk")
+        .select_related("user_id")
         .all()
     )
     return render(
