@@ -1,19 +1,17 @@
 {% extends 'root.html' %} 
 {% block title %} Posts {% endblock %}
 
-
  {% block body%}
 <h2>Posts list</h2>
 
 <ul>
   {% for post in posts %}
   <li>
-    {{ post.title }}; author: {{ post.user_id.name }} {% comment %}
-    <!-- <a
-      href="{{ url_for('users_app.detail', user_id=user.id)}}"
-      class="btn btn-outline-primary m-1"
-      >{{ user.name }}</a -->
-    {% endcomment %}
+    title: <a href="{% url 'post' post.pk %}">{{ post.title }}</a>; 
+
+    author: 
+    <a href="{% url 'user' post.user_id.pk %}">{{ post.user_id.username }}</a>
+
   </li>
   {% endfor %}
 </ul>

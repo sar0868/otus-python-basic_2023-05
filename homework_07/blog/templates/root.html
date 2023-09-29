@@ -1,14 +1,11 @@
 <!DOCTYPE html>
+{% load  static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} {% endblock %}</title>
-      <link
-        rel="stylesheet"
-        href="static/css/bootstrap.min.css"
-      />
-
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}" />
   </head>
 
   <body class="m-2">
@@ -27,57 +24,39 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-content">
-          <ul class="navbar-nav me-auto">
-          
-          {% comment %} {% with listPage = [('index.html', 'Home page'), ('users.index.html', "Users list")] %}
-            {% for endpoint, title in listPage %} 
-
-             {% if endpoint == request.path %}
+          <ul class="navbar-nav me-auto">       
             <li class="nav-item">
-              <a
-                class="nav-link active" 
-                aria-current="page"
-                href="{{ path }}"
-                >{{ title }}</a
-              >
+              <a href="/" class="nav-link"> Home page</a>
             </li>
-              {% endif %}
-            {% endfor %} 
-          {% endwith %} {% endcomment %}
-            <li class="nav-item"> 
-            <a href="/" class="nav-link"> Home page</a>
+            <li class="nav-item">
+              <a href="{% url 'users' %}" class="nav-link"> Users list</a>
             </li>
-            <li class="nav-item"> 
-            <a href="/users/" class="nav-link"> Users list</a>
-            </li>
-            <li class="nav-item"> 
-              <a href="/posts/" class="nav-link"> Posts list</a>
-            </li>
+            <li class="nav-item">
+              <a href="{% url 'posts' %}" class="nav-link"> Posts list</a>
+            </li> 
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
-      {% comment %} {% with messages = get_flashed_messages(with_categories=True) %} {% if
-      messages %} {% endcomment %}
       <div>
         {% for category, message in messages %}
         <div
-          {% comment %} class="alert alert-{{ 'primary' if category == 'message' else category }}" {% endcomment %}
+          {% comment %}
+          class="alert alert-{{ 'primary' if category == 'message' else category }}"
+          {% endcomment %}
         >
           {{ message }}
         </div>
         {% endfor %}
       </div>
-      {% comment %} {% endif %} {% endwith %} {% endcomment %}
-    </div>
-    {% block body %} {% endblock %} {% comment %}
-    <footer>
-      {% block footer %} &copy otus-python-basic_2023-05, safarov-ar@yandex.ru{%
-      endblock %}
-    </footer>
 
-    <!--    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>-->
-    {% endcomment %}
+    </div>
+    {% block body %} {% endblock %}
+    <footer>
+      {% block footer %}{%  endblock %}
+       <p> &copy otus-python-basic_2023-05, safarov-ar@yandex.ru </p>
+    </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
   </body>
 </html>
