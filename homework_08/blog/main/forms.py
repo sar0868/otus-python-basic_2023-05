@@ -19,7 +19,7 @@ class UserCreateForm(ModelForm):
 class PostCreateForm(ModelForm):
     class Meta:
         model = Post
-        fields = ["title", "body"]
+        fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
