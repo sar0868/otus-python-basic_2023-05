@@ -7,8 +7,7 @@
     <div>name: {{ user.name }}</div>
     <div>username: {{ user.username }}</div>
     <div>
-      email: {% if user.email != None %} {{user.email}} {% endif %} {{ user.post
-      }}
+      email: {% if user.email != None %} {{user.email}} {% endif %} 
     </div>
   </div>
 </div>
@@ -23,7 +22,7 @@
   </ul>
 </div>
 <div class="my-2">
-  <a class="btn btn-primary" href="{% url 'add_post' %}">Add post</a>
+  <a class="btn btn-primary" href="{% url 'add_post' user.pk %}">Add post</a>
 </div>
 
 {% endblock %}

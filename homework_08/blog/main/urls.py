@@ -16,6 +16,6 @@ urlpatterns = [
     path("users/add_user/", UsersCreate.as_view(), name='add_user'),
     path("users/<slug:pk>/", UsersDetail.as_view(), name="user"),
     path("posts/", PostsList.as_view(), name="posts"),
-    path("posts/add/", PostsCreate.as_view(), name="add_post"),
+    path("posts/add/<slug:pk>/", PostsCreate.as_view(), name="add_post"),
     path("posts/<slug:pk>/", PostsDetail.as_view(), name="post"),
 ]
