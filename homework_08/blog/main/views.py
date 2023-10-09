@@ -1,6 +1,10 @@
+from typing import Any
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse, reverse_lazy
 from .models import User, Post
+from .forms import UserCreateForm, PostCreateForm
 
 # Create your views here.
 
@@ -11,56 +15,47 @@ def index(request: HttpRequest) -> HttpResponse:
         template_name="main/index.html",
     )
 
+class UsersList(ListView):
+    model = User
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Users list"     
+        return context
+    
+     
+class UsersDetail(DetailView):
+    model = User
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(user_id=self.object.pk)
+        return context
+    
 
-def users_list(request: HttpRequest) -> HttpResponse:
-    users = (
-        User
-        .objects
-        .order_by("pk")
-        .all()
-    )
-    return render(
-        request=request,
-        template_name="users/users.html",
-        context={"users": users},
-    )
+class UsersCreate(CreateView):
+    model = User
+    # fields = '__all__'
+    form_class = UserCreateForm
+    success_url = reverse_lazy('users')
+    
 
+class PostsList(ListView):
+    model = Post
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['posts_list'] = "Posts list"
+        context['title'] = "Posts list"
+        return context
 
-def get_user_by_id(request: HttpRequest, user_id: int) -> HttpResponse:
-    user = (
-        User.objects.get(pk=user_id)
-    )
-    posts = (
-        Post.objects.filter(user_id=user_id)
-    )
-    return render(
-        request=request,
-        template_name="users/detail.html",
-        context={"user": user, "posts": posts},
-    )
+class PostsDetail(DetailView):
+    model = Post   
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        return context
 
-
-def posts_list(request: HttpRequest) -> HttpResponse:
-    posts = (
-        Post
-        .objects
-        .order_by("pk")
-        .select_related("user_id")
-        .all()
-    )
-    return render(
-        request=request,
-        template_name="posts/posts.html",
-        context={"posts": posts},
-    )
-
-
-def get_post_by_id(request: HttpRequest, post_id: int) -> HttpResponse:
-    post = (
-        Post.objects.get(pk=post_id)
-    )
-    return render(
-        request=request,
-        template_name="posts/detail.html",
-        context={"post": post},
-    )
+class PostsCreate(CreateView):
+    model = Post
+    form_class = PostCreateForm
+    success_url = reverse_lazy('posts')

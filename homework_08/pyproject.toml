@@ -1,10 +1,9 @@
 [tool.poetry]
-name = "homework-07"
+name = "homework-08"
 version = "0.1.0"
 description = ""
 authors = ["sar0868 <safarov-ar@yandex.ru>"]
 readme = "README.md"
-packages = [{include = "homework_07"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10"
