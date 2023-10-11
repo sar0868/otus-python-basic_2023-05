@@ -1,0 +1,27 @@
+{% extends 'root.html' %} {% block title %} User: {{ user.name}} {% endblock %}
+{% block body %}
+<h2>User: {{user.name}}</h2>
+
+<div>
+  <div>
+    <div>name: {{ user.name }}</div>
+    <div>username: {{ user.username }}</div>
+    <div>
+      email: {% if user.email != None %} {{user.email}} {% endif %} 
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <h3>Posts user {{user.name}}</h3>
+  <ul class="list-group">
+    {% for post in posts %} {{ post }}
+    <li class="list-group-item m-0">
+      title: <a href="{% url 'post' post.pk %}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="my-2">
+  <a class="btn btn-primary" href="{% url 'users' %}">Back to users list</a>
+</div>
+{% endblock %}
