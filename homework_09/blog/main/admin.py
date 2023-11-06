@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import User, Post
+from .models import Author, Post
 
 
 # Register your models here.
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
     list_display = "pk", "name", "username", "email"
     list_display_links = "pk", "username"
 

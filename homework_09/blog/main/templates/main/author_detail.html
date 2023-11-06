@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="grid">
-  <h3>Posts user {{user.name}}</h3>
+  <h3>Posts author {{user.name}}</h3>
   <ul class="list-group">
     {% for post in posts %} {{ post }}
     <li class="list-group-item m-0">
@@ -22,6 +22,6 @@
   </ul>
 </div>
 <div class="my-2">
-  <a class="btn btn-primary" href="{% url 'users' %}">Back to users list</a>
+  <a class="btn btn-primary" href="{% url 'authors' %}">Back to authors list</a>
 </div>
 {% endblock %}

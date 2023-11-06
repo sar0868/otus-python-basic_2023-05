@@ -2,11 +2,11 @@ from django import forms
 from django.forms import ModelForm
 
 
-from .models import User, Post
+from .models import Author, Post
 
-class UserCreateForm(ModelForm):
+class AuthorCreateForm(ModelForm):
     class Meta:
-        model = User
+        model = Author
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

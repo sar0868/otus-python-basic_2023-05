@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
 
     "main.apps.MainConfig",
-    "myauth.apps.MyauthConfig",
+    # "myauth.apps.MyauthConfig",
 ]
 
 MIDDLEWARE = [

@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse, reverse_lazy
-from .models import User, Post
-from .forms import UserCreateForm, PostCreateForm
+from .models import Author, Post
+from .forms import AuthorCreateForm, PostCreateForm
 
 # Create your views here.
 
@@ -18,17 +18,17 @@ def index(request: HttpRequest) -> HttpResponse:
     )
 
 
-class UsersList(ListView):
-    model = User
+class AuthorsList(ListView):
+    model = Author
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['title'] = "Users list"
+        context['title'] = "Authors list"
         return context
 
 
-class UsersDetail(DetailView):
-    model = User
+class AuthorsDetail(DetailView):
+    model = Author
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
@@ -36,11 +36,11 @@ class UsersDetail(DetailView):
         return context
 
 
-class UsersCreate(CreateView):
-    model = User
+class AuthorsCreate(CreateView):
+    model = Author
     # fields = '__all__'
-    form_class = UserCreateForm
-    success_url = reverse_lazy('users')
+    form_class = AuthorCreateForm
+    success_url = reverse_lazy('authors')
 
 
 class PostsList(ListView):
