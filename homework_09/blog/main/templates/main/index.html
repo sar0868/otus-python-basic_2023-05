@@ -1,0 +1,15 @@
+{% extends 'root.html' %} 
+{% block title %} Home page {% endblock title %} 
+{% block body %}
+<h1>Blog</h1>
+<div>
+  <ul>
+    This is a blog project:
+    <li>
+      authors with a link to details
+      <a href="{% url 'authors' %}"> authors list </a>
+    </li>
+    <li>posts with a link to <a href="{% url 'posts' %}">posts list</a></li>
+  </ul>
+</div>
+{% endblock body %}

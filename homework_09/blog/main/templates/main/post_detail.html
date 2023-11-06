@@ -1,0 +1,20 @@
+{% extends 'root.html' %} {% block title %} Post: {{ post.pk}} {% endblock %} 
+{% block body %}
+<h2>Post: {{post.title}}</h2>
+
+<div>
+  <div>
+    <div>title: {{ post.title }}</div>
+    <div>body: {% if post.body != None %} {{ post.body}} {% endif %}</div>
+    <div>
+      username:
+      <a href="{% url 'author' post.author_id.pk %}">
+        {{ post.author_id.username}}
+      </a>
+    </div>
+  </div>
+
+  <div class="my-2">
+  <a class="btn btn-primary" href="{% url 'posts' %}">Back to posts list</a>
+</div>
+  {% endblock %}
