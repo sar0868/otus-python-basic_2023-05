@@ -22,7 +22,7 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=64, unique=True)
     body = models.TextField(blank=True, null=True)
-    user_id = models.ForeignKey(
+    author_id = models.ForeignKey(
         Author,
         on_delete=models.PROTECT,
     )

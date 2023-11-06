@@ -32,7 +32,7 @@ class AuthorsDetail(DetailView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(user_id=self.object.pk)
+        context['posts'] = Post.objects.filter(author_id=self.object.pk)
         return context
 
 

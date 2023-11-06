@@ -1,20 +1,20 @@
-{% extends 'root.html' %} {% block title %} User: {{ user.name}} {% endblock %}
+{% extends 'root.html' %} {% block title %} User: {{ author.name}} {% endblock %}
 {% block body %}
-<h2>User: {{user.name}}</h2>
+<h2>User: {{author.name}}</h2>
 
 <div>
   <div>
-    <div>name: {{ user.name }}</div>
-    <div>username: {{ user.username }}</div>
+    <div>name: {{ author.name }}</div>
+    <div>username: {{ author.username }}</div>
     <div>
-      email: {% if user.email != None %} {{user.email}} {% endif %} 
+      email: {% if author.email != None %} {{author.email}} {% endif %}
     </div>
   </div>
 </div>
 <div class="grid">
-  <h3>Posts author {{user.name}}</h3>
+  <h3>Posts author {{author.name}}</h3>
   <ul class="list-group">
-    {% for post in posts %} {{ post }}
+    {% for post in posts %}
     <li class="list-group-item m-0">
       title: <a href="{% url 'post' post.pk %}">{{ post.title }}</a>
     </li>

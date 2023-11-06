@@ -13,5 +13,5 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostrAdmin(admin.ModelAdmin):
-    list_display = "pk", "title", "body", "user_id"
+    list_display = "pk", "title", "body", "author_id"
     list_display_links = "pk", "title"

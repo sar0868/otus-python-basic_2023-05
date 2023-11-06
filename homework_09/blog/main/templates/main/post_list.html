@@ -10,7 +10,7 @@
     title: <a href="{% url 'post' post.pk %}">{{ post.title }}</a>; 
 
     author: 
-    <a href="{% url 'user' post.user_id.pk %}">{{ post.user_id.username }}</a>
+    <a href="{% url 'author' post.author_id.pk %}">{{ post.author_id.username }}</a>
 
   </li>
   {% endfor %}
