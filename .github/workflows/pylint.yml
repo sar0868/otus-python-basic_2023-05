@@ -18,9 +18,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        cd homework_10
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r homework_10/requirements.txt
     - name: Analysing the code with pylint
       run: |
+        cd homework_10
         pylint $(git ls-files '*.py')
