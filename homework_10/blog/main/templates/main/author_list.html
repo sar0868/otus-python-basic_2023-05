@@ -1,0 +1,20 @@
+{% extends 'root.html' %} 
+{% block title %} 
+{{ title }} 
+{% endblock %} 
+
+{% block body%}
+<h2>Authors list</h2>
+<ul>
+  {% for author in author_list %}
+  <li>
+    name: {{ author.name }}
+    <a href="{% url 'main:author' author.id %}">{{ author.name }}</a>;
+    username: {{author.username }}
+  </li>
+  {% endfor %}
+</ul>
+<div class="my-2">
+  <a class="btn btn-primary" href="{% url 'main:add_author' %}">Add author</a>
+</div>
+{% endblock %}

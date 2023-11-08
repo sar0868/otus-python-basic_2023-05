@@ -1,0 +1,16 @@
+{% extends 'root.html' %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block body %}
+    <h2>User create</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="create">
+    </form>
+    <a href="{% url 'main:authors' %}">Back to list</a>
+
+{% endblock %}

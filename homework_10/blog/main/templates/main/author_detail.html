@@ -1,0 +1,27 @@
+{% extends 'root.html' %} {% block title %} User: {{ author.name}} {% endblock %}
+{% block body %}
+<h2>User: {{author.name}}</h2>
+
+<div>
+  <div>
+    <div>name: {{ author.name }}</div>
+    <div>username: {{ author.username }}</div>
+    <div>
+      email: {% if author.email != None %} {{author.email}} {% endif %}
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <h3>Posts author {{author.name}}</h3>
+  <ul class="list-group">
+    {% for post in posts %}
+    <li class="list-group-item m-0">
+      title: <a href="{% url 'main:post' post.pk %}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="my-2">
+  <a class="btn btn-primary" href="{% url 'main:authors' %}">Back to authors list</a>
+</div>
+{% endblock %}
