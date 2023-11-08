@@ -51,3 +51,8 @@ _deadline_: 06.11.2023
 _start_: 11.10.2023  
 _completed_: 07.11.2023  
 
+**10. Homework 10**  
+_deadline_: 09.11.2023  
+_start_: 08.10.2023  
+_completed_:  
+
