@@ -1,0 +1,18 @@
+{% extends 'root.html' %}
+{% block title %}
+Delete zodiac
+{% endblock title %}
+
+{% block body %}
+<h1>Delete post</h1>
+<form action="" method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ post.title }}"?</p>
+      <input type="submit" value="Confirm" />
+</form>
+
+
+
+<div>
+  <a href="{% url 'main:posts' %}">Back to posts list</a>
+</div>
+{% endblock body %}
