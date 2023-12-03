@@ -1,0 +1,10 @@
+[MAIN]
+disable= C0115,
+        C0114,
+        C0116,
+        R0903,
+        E1101,
+        E0213,
+        R0401,
+        R0913,
+ignore-paths=migrations
